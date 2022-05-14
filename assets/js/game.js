@@ -3,6 +3,19 @@
 //    * Fight all enemy-robots
 //    * Defeat each enemy-robot
 // "LOSE" - Player robot's health is zero or less
+
+// function to set name
+var getPlayerName = function() {
+  var name = "";
+
+  while (name === "" || name === null) {
+    name = prompt("What is your robot's name?");
+  }
+
+  console.log("Your robot's name is " + name);
+  return name;
+};
+
 var playerInfo = {
   name: window.prompt("What is your robot's name?"),
   health: 100,
@@ -52,10 +65,32 @@ var enemyInfo = [
 
 // function to generate a random numeric value
 var randomNumber = function(min, max) {
-  var value = Math.floor(Math.random() * (max - min + 1);
+  var value = Math.floor(Math.random() * (max - min + 1));
 
   return value;
 };
+
+var fightOrSkip = function() {
+  // ask player if they'd like to fight or skip using fightOrSkip function
+// repeat and execute as long as the enemy-robot is alive 
+while (playerInfo.health > 0 && enemy.health > 0) {
+  fightOrSkip(); // <-- Replace code with this function call
+  var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+}
+  // if player picks "skip" confirm and then stop the loop
+  if (promptFight === "skip" || promptFight === "SKIP") {
+    // confirm player wants to skip
+    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+    // if yes (true), leave fight
+    if (confirmSkip) {
+      window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+      // subtract money from playerMoney for skipping
+      playerInfo.playerMoney = playerInfo.money - 10;
+      shop();
+    }
+  }
+}
 
 // fight function (now with parameter for enemy's name) 
 var fight = function(enemy) {
@@ -200,27 +235,11 @@ var shop = function() {
 case "refill":
   playerInfo.refillHealth();
   break;
-
-        // increase health and decrease money
-        playerInfo.health = playerInfo.health + 20;
-playerInfo.money = playerInfo.money - 7;
-    }
-    else {
-        window.alert("You don't have enough money!");
-    }
       break;
       case "UPGRADE":
         case "upgrade":
           playerInfo.upgradeAttack();
           break;
-
-        // increase attack and decrease money
-        playerAttack = playerAttack + 6;
-        playerMoney = playerMoney - 7;
-    }
-    else {
-        window.alert("You don't have enough money!");
-    }
       break;
     case 'LEAVE':
     case 'leave':
